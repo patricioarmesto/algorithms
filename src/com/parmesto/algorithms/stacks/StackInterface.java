@@ -19,5 +19,7 @@ public interface StackInterface<T> {
     
     public int size();
     
+    public T peek();
+    
     
 }

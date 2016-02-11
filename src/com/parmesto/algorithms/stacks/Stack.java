@@ -48,6 +48,15 @@ public class Stack<Item> implements StackInterface<Item>, Iterable<Item> {
 
     }
 
+    @Override
+    public Item peek() {
+        if (first == null) {
+            return null;
+        }
+
+        return first.item;
+    }
+
     class Node {
 
         Item item;
@@ -78,23 +87,6 @@ public class Stack<Item> implements StackInterface<Item>, Iterable<Item> {
             current = current.next;
             return item;
         }
-    }
-
-    public static void main(String[] args) {
-        // Create a stack and push/pop strings as directed on StdIn.   
-        Stack<String> s = new Stack<>();
-
-        Scanner input = new Scanner(System.in);
-
-        while (input.hasNext()) {
-            String item = input.next();
-            if (!item.equals("-")) {
-                s.push(item);
-            } else if (!s.isEmpty()) {
-                System.out.println(s.pop() + " ");
-            }
-        }
-        System.out.println("(" + s.size() + " left on stack)");
     }
 
 }

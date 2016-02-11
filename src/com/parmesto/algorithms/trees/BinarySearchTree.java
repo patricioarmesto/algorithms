@@ -7,6 +7,9 @@ package com.parmesto.algorithms.trees;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 /**
  *
@@ -134,6 +137,101 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractTree<E> {
 
     }
 
+    public void preorderIterative(TreeNode<E> root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode<E>> stack = new Stack<>();
+        while (true) {
+            while (root != null) {
+                System.out.print(root.element + " ");
+                stack.push(root);
+                root = root.left;
+            }
+
+            if (stack.isEmpty()) {
+                break;
+            }
+
+            root = stack.pop();
+            root = root.right;
+        }
+
+    }
+
+    /**
+     * Visit the node twice, and print the node in second visit
+     * @param root
+     */
+    public void postorderIterative(TreeNode<E> root) {
+        Stack<TreeNode<E>> stack = new Stack<>();
+
+        if (root == null) {
+            return;
+        }
+        while (true) {
+            if (root != null) {
+                stack.push(root);
+                root = root.left;
+            } else {
+                if (stack.isEmpty()) {
+                    return;
+                } else if (stack.peek().right == null) {
+                    root = stack.pop();
+                    System.out.println(root.element);
+                    if (root == stack.pop().right) {
+                        System.out.println(stack.peek().element);
+                        stack.pop();
+                    }
+                }
+
+                if (stack.isEmpty()) {
+                    root = stack.peek().right;
+                } else {
+                    root = null;
+                }
+            }
+        }
+
+    }
+
+    public void breathFirst(TreeNode<E> root) {
+        if (root == null) return;
+        
+        Queue<TreeNode<E>> queue = new LinkedList<>();
+        
+        queue.add(root);
+        
+        while (!queue.isEmpty())     {
+                TreeNode<E> node = queue.remove();
+                
+                System.out.print(root.element + " ");
+                
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+        }
+    
+    }
+    
+    public int getTreeHeight(TreeNode<E> root) {
+        if ( root == null) return 0;
+        int heightLeft = getTreeHeight(root.left);
+        int heightRight = getTreeHeight(root.right);
+        int height = heightRight;
+        if (heightLeft > heightRight) {
+            height = heightLeft;
+        }
+        
+        return height + 1;
+        
+        
+    }
+    
     @Override
     public int getSize() {
         return size;
@@ -220,51 +318,56 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractTree<E> {
         // Element deleted successfully 
     } 
     
-     @Override 
-     /** Obtain an iterator. Use inorder. */ 
-     public java.util.Iterator<E> iterator() { 
-         return new InorderIterator(); 
-     } 
-
+     @Override
+    /**
+     * Obtain an iterator. Use inorder.
+     */
+    public java.util.Iterator<E> iterator() { 
+     return new InorderIterator(); 
+    }
+    
     private class InorderIterator implements Iterator<E> {
 
-        private ArrayList<E> list = new ArrayList<>();
-        private int current = 0;
-        
-        public InorderIterator() {
-            inorder(); 
-        }
+    private ArrayList<E> list = new ArrayList<>();
+    private int current = 0;
 
-        @Override
-        public boolean hasNext() {
-          return current < list.size(); 
-        }
-
-        @Override
-        public E next() {
-            return list.get(current++); 
-        }
-         private void inorder() {       
-             inorder(root);          }
-         
-        private void inorder(TreeNode<E> root) { 
-            if (root == null) return; 
-            inorder(root.left); 
-            list.add(root.element); 
-            inorder(root.right); 
-        } 
-
-        @Override
-        public void remove() {
-            delete(list.get(current)); // Delete the current element 
-            list.clear(); // Clear the list 
-            inorder(); // Rebuild the list 
-        }
-        
-        
+    public InorderIterator() {
+        inorder();
     }
-     
-    public void clear() {     
+
+    @Override
+    public boolean hasNext() {
+        return current < list.size();
+    }
+
+    @Override
+    public E next() {
+        return list.get(current++);
+    }
+
+    private void inorder() {
+        inorder(root);
+    }
+
+    private void inorder(TreeNode<E> root) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left);
+        list.add(root.element);
+        inorder(root.right);
+    }
+
+    @Override
+    public void remove() {
+        delete(list.get(current)); // Delete the current element 
+        list.clear(); // Clear the list 
+        inorder(); // Rebuild the list 
+    }
+
+}
+
+public void clear() {     
         root = null;     
     size = 0;    
     } 

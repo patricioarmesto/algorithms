@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.parmesto.algorithms.arrays;
+package com.parmesto.algorithms.stacks;
 
-import java.util.Arrays;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,33 +14,34 @@ import static org.junit.Assert.*;
  *
  * @author Patricio
  */
-public class ArrayTest {
-
-    public ArrayTest() {
+public class StackWithMin1Test {
+    
+    public StackWithMin1Test() {
     }
-
+    
     @Before
     public void setUp() {
     }
-
+    
     @After
     public void tearDown() {
     }
 
     @Test
-    public void testReverseArrayInPlace() {
-
-        int[] data = {1, 2, 3, 4, 5};
-        Array.reverseArrayInPlace(data);    
-        System.out.println(Arrays.toString(data));
+    public void testStackWithMin1() {
         
-    }
-
-        @Test
-    public void testReverseStringInPlace() {
-
-        String data = "hola";
-        System.out.println(Array.reverseStringInPlace(data));
+        StackWithMin1<Integer> stack = new StackWithMin1<>();
+        
+        stack.push(10);
+        System.out.println(stack.getMin());
+        
+        stack.push(9);
+        System.out.println(stack.getMin());
+        
+        stack.pop();
+        System.out.println(stack.getMin());
+        
+        
         
     }
 
