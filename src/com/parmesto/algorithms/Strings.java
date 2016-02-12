@@ -10,25 +10,45 @@ package com.parmesto.algorithms;
  * @author Patricio
  */
 public class Strings {
-    
+
     public static boolean isUniqueChars2(String str) {
-        if (str.length() > 256 ) return false;
-        
+        if (str.length() > 256) {
+            return false;
+        }
+
         boolean[] char_set = new boolean[256];
-        
-        for (int i = 0 ; i < str.length() ; i++) {
+
+        for (int i = 0; i < str.length(); i++) {
             int val = str.charAt(i);
             if (char_set[val]) {
                 return false;
             }
             char_set[val] = true;
         }
-        
+
         return true;
-        
+
     }
-    
+
     public static String removeDuplicates(String str) {
         return null;
     }
+
+    public static boolean isValidPalindrome(String s) {
+        if (s == null || s.length() == 0) {
+            return false;
+        }
+
+        s = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        System.out.println(s);
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != s.charAt(s.length() - 1 - i)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

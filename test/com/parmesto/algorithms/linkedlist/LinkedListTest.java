@@ -5,11 +5,11 @@
  */
 package com.parmesto.algorithms.linkedlist;
 
-import com.parmesto.algorithms.linkedlist.LinkedList;
+import java.util.Iterator;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -29,29 +29,21 @@ public class LinkedListTest {
     }
 
     @Test
-    public void testGetItem() {
-    }
+    public void testFindMiddleElement() {
 
-    @Test
-    public void testGetNext() {
-    }
+        LinkedList<Integer> list = new LinkedList<>(1);
 
-    @Test
-    public void testReverse() {
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        
+        Iterator<Integer> iter = list.iterator();
 
-        LinkedList list1 = new LinkedList("One", null);
-        LinkedList list2 = new LinkedList("Two", null);
-        LinkedList list3 = new LinkedList("Three", null);
-
-        list1.next = list2;
-        list2.next = list3;
-
-        LinkedList<String> reverseList = LinkedList.reverse(list1);
-
-        for (String s : reverseList) {
-            System.out.println(s + " ");
+        while (iter.hasNext()) {
+            System.out.print(iter.next().toString() + " -> ");
         }
 
+        Assert.assertEquals(new Integer(3), list.findMiddle());
     }
-
 }

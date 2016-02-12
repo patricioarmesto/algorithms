@@ -1,66 +1,94 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.parmesto.algorithms.linkedlist;
 
+import com.parmesto.algorithms.Queue;
 import java.util.Iterator;
-import java.util.ListIterator;
 
-/**
- *
- * @author Patricio
- * @param <Item>
- */
-public class LinkedList<Item> implements Iterable<Item> {
+public class LinkedList<E> implements Iterable<E> {
 
-    Item item;
-    LinkedList<Item> next;
+    private Node head;
+    private Node tail;
 
-    public LinkedList(Item item, LinkedList<Item> next) {
-        this.item = item;
-        this.next = next;
-    }
+    private class Node {
 
-    public Item getItem() {
-        return item;
-    }
+        protected E item;
+        protected Node next;
 
-    public LinkedList<Item> getNext() {
-        return next;
-    }
-
-    public static <Item> LinkedList<Item> reverse(final LinkedList<Item> original) {
-
-        if (original == null) {
-            throw new NullPointerException("Cannot reverse a null list");
-        }
-        if (original.getNext() == null) {
-            return original;
+        public Node(E item) {
+            this.item = item;
         }
 
-        final LinkedList<Item> next = original.next;
-        original.next = null;
+        public Node(E item, Node next) {
+            this.item = item;
+            this.next = next;
+        }
 
-        final LinkedList<Item> othersReversed = reverse(next);
-        next.next = original;
-        return othersReversed;
+        public void setItem(E item) {
+            this.item = item;
+        }
 
+        public void setNext(Node next) {
+            this.next = next;
+        }
+
+        public E getItem() {
+            return item;
+        }
+
+        public Node getNext() {
+            return next;
+        }
+
+        @Override
+        public String toString() {
+            return item.toString();
+        }
+    }
+
+    public LinkedList(E element) {
+
+        this.head = new Node(element);
+        tail = head;
+    }
+
+    public void add(E element) {
+        Node newNode = new Node(element);
+
+        tail.next = newNode;
+        tail = newNode;
+    }
+
+    public E findMiddle() {
+
+        Node current = head;
+        int length = 0;
+
+        Node middle = head;
+
+        while (current != null) {
+            length++;
+
+            if (length % 2 == 0) {
+                middle = middle.next;
+            }
+
+            current = current.next;
+        }
+
+        return middle.getItem();
     }
 
     @Override
-    public Iterator<Item> iterator() {
+    public Iterator<E> iterator() {
         return new ListIterator();
     }
 
-    private class ListIterator implements Iterator<Item> {
+    private class ListIterator implements Iterator<E> {
 
-        private Item current = item;
+        private Node current = head;
 
         @Override
         public boolean hasNext() {
-            return next != null;
+            return current != null;
         }
 
         @Override
@@ -68,10 +96,11 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
 
         @Override
-        public Item next() {
-            Item item = current;
-            current = next.item;
+        public E next() {
+            E item = current.item;
+            current = current.next;
             return item;
         }
     }
+
 }
