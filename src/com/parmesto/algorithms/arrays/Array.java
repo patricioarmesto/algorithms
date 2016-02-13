@@ -12,9 +12,11 @@ import java.util.ArrayList;
  * @author Patricio
  */
 public class Array {
+
     /**
      * Reverse Array in place
-     * @param data 
+     *
+     * @param data
      */
     public static void reverseArrayInPlace(int[] data) {
 
@@ -28,8 +30,9 @@ public class Array {
 
     /**
      * Reverse String in place
+     *
      * @param data
-     * @return 
+     * @return
      */
     public static String reverseStringInPlace(String data) {
         char[] charData = data.toCharArray();
@@ -44,19 +47,36 @@ public class Array {
 
     /**
      * Merge two arrays
+     *
      * @param a
      * @param b
-     * @return 
+     * @return
      */
-    public static ArrayList<String> merge (String[] a, String[] b) {
+    public static ArrayList<String> merge(String[] a, String[] b) {
         ArrayList<String> result = new ArrayList<>();
-        for (String w : a) result.add(w);
-        for (String w : b) result.add(w);
+        for (String w : a) {
+            result.add(w);
+        }
+        for (String w : b) {
+            result.add(w);
+        }
         return result;
-               
+
     }
 
-    public static void findMinMaxBruteForce(int[] data) {
-        
+    public static void removeElement(int[] data, int val) {
+
+        int i = 0;
+        int j = 0;
+
+        while (j < data.length) {
+            if (data[j] != val) {
+                data[i] = data[j];
+                i++;
+            }
+
+            j++;
+        }
     }
+
 }
