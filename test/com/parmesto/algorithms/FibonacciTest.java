@@ -16,21 +16,21 @@ import static org.junit.Assert.*;
  * @author Patricio
  */
 public class FibonacciTest {
-    
+
     public FibonacciTest() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
 
     @Test
     public void testFibonacciRecusion() {
-        
+
         Assert.assertEquals(0, Fibonacci.fibonacciRecusion(0));
         Assert.assertEquals(1, Fibonacci.fibonacciRecusion(1));
         Assert.assertEquals(1, Fibonacci.fibonacciRecusion(2));
@@ -40,12 +40,22 @@ public class FibonacciTest {
 
     @Test
     public void testFibonacciIterative() {
-        
+
         Assert.assertEquals(0, Fibonacci.fibonacciIterative(0));
         Assert.assertEquals(1, Fibonacci.fibonacciIterative(1));
         Assert.assertEquals(1, Fibonacci.fibonacciIterative(2));
         Assert.assertEquals(2, Fibonacci.fibonacciIterative(3));
         Assert.assertEquals(3, Fibonacci.fibonacciIterative(4));
     }
-    
+
+    @Test
+    public void testFibonacciDynamic() {
+
+        Assert.assertEquals(0, Fibonacci.fibonacciDynamic(0));
+        Assert.assertEquals(1, Fibonacci.fibonacciDynamic(1));
+        Assert.assertEquals(1, Fibonacci.fibonacciDynamic(2));
+        Assert.assertEquals(2, Fibonacci.fibonacciDynamic(3));
+        Assert.assertEquals(3, Fibonacci.fibonacciDynamic(4));
+    }
+
 }

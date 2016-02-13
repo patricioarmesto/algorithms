@@ -38,7 +38,7 @@ public class Fibonacci {
         if (n == 0) {
             return 0;
         }
-        
+
         if (n == 1 || n == 2) {
             return 1;
         }
@@ -50,5 +50,31 @@ public class Fibonacci {
 
         }
         return fibonacci; //Fibonacci number
+    }
+
+    /**
+     * Fibbonacci using Dynamic Programming
+     *
+     * @param N
+     * @return
+     */
+    public static int fibonacciDynamic(int N) {
+        if (N == 0) {
+            return 0;
+        }
+        int[] fib = new int[N + 1];
+
+        // base cases
+        fib[0] = 0;
+        fib[1] = 1;
+
+        // bottom-up dynamic programming
+        for (int n = 2; n <= N; n++) {
+            fib[n] = fib[n - 1] + fib[n - 2];
+        }
+
+        // print results
+        return fib[N];
+
     }
 }
