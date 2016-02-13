@@ -37,13 +37,22 @@ public class LinkedListTest {
         list.add(3);
         list.add(4);
         list.add(5);
-        
-        Iterator<Integer> iter = list.iterator();
-
-        while (iter.hasNext()) {
-            System.out.print(iter.next().toString() + " -> ");
-        }
 
         Assert.assertEquals(new Integer(3), list.findMiddle());
+    }
+
+    @Test
+    public void testReverseList() {
+        System.out.println("testReverseList");
+        LinkedList<Integer> list = new LinkedList<>(5);
+
+        list.add(4);
+        list.add(3);
+        list.add(2);
+        list.add(1);
+
+        list.reverseList();
+
+        System.out.println(list.toString());
     }
 }
