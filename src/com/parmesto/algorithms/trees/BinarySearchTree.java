@@ -219,8 +219,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractTree<E> {
     }
     
     public int getTreeHeight(TreeNode<E> root) {
-        if ( root == null) return 0;
-        int heightLeft = getTreeHeight(root.left);
+        if ( root == null) return 0;        int heightLeft = getTreeHeight(root.left);
         int heightRight = getTreeHeight(root.right);
         int height = heightRight;
         if (heightLeft > heightRight) {
