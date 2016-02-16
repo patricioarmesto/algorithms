@@ -219,7 +219,8 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractTree<E> {
     }
     
     public int getTreeHeight(TreeNode<E> root) {
-        if ( root == null) return 0;        int heightLeft = getTreeHeight(root.left);
+        if ( root == null) return 0;        
+        int heightLeft = getTreeHeight(root.left);
         int heightRight = getTreeHeight(root.right);
         int height = heightRight;
         if (heightLeft > heightRight) {
@@ -327,47 +328,47 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractTree<E> {
     
     private class InorderIterator implements Iterator<E> {
 
-    private ArrayList<E> list = new ArrayList<>();
-    private int current = 0;
+        private ArrayList<E> list = new ArrayList<>();
+        private int current = 0;
 
-    public InorderIterator() {
-        inorder();
-    }
-
-    @Override
-    public boolean hasNext() {
-        return current < list.size();
-    }
-
-    @Override
-    public E next() {
-        return list.get(current++);
-    }
-
-    private void inorder() {
-        inorder(root);
-    }
-
-    private void inorder(TreeNode<E> root) {
-        if (root == null) {
-            return;
+        public InorderIterator() {
+            inorder();
         }
-        inorder(root.left);
-        list.add(root.element);
-        inorder(root.right);
+
+        @Override
+        public boolean hasNext() {
+            return current < list.size();
+        }
+
+        @Override
+        public E next() {
+            return list.get(current++);
+        }
+
+        private void inorder() {
+            inorder(root);
+        }
+
+        private void inorder(TreeNode<E> root) {
+            if (root == null) {
+                return;
+            }
+            inorder(root.left);
+            list.add(root.element);
+            inorder(root.right);
+        }
+
+        @Override
+        public void remove() {
+            delete(list.get(current)); // Delete the current element 
+            list.clear(); // Clear the list 
+            inorder(); // Rebuild the list 
+        }
+
     }
 
-    @Override
-    public void remove() {
-        delete(list.get(current)); // Delete the current element 
-        list.clear(); // Clear the list 
-        inorder(); // Rebuild the list 
-    }
-
-}
-
-public void clear() {     
+    public void clear() {     
         root = null;     
-    size = 0;    
+        size = 0;    
     } 
 }
